@@ -1,7 +1,7 @@
 {
-  "name": "react-redux-bootstrap-webpack-starter",
-  "version": "4.0.0",
-  "description": "react js + redux + react router + hot reload + devTools + bootstrap + webpack starter",
+  "name": "tdw",
+  "version": "0.0.1",
+  "description": "Todo + Wallet xD",
   "main": "src/index.js",
   "scripts": {
     "flow": "node_modules/.bin/flow",
@@ -36,12 +36,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MacKentoch/react-redux-bootstrap-webpack-starter.git"
+    "url": "git+https://github.com/pozterz/react-redux-bootstrap-webpack-starter.git"
   },
   "bugs": {
-    "url": "https://github.com/MacKentoch/react-redux-bootstrap-webpack-starter/issues"
+    "url": "https://github.com/pozterz/react-redux-bootstrap-webpack-starter/issues"
   },
-  "author": "Erwan DATIN (MacKentoch)",
+  "author": "Pozterz :D",
   "license": "MIT",
   "devDependencies": {
     "babel-cli": "^6.24.1",
