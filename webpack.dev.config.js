@@ -24,7 +24,6 @@ const config = {
       'react-hot-loader',
       'babel-polyfill',
       'jquery',
-      'bootstrap/dist/js/bootstrap.min.js',
       'redux',
       'react-router-redux',
       'redux-logger',

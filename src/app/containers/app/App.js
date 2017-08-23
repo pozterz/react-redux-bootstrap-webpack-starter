@@ -5,11 +5,11 @@ import React, {
 }                             from 'react';
 import PropTypes              from 'prop-types';
 import {
-  NavigationBar,
   BackToTop
 }                             from '../../components';
 import navigationModel        from '../../config/navigation.json';
 import MainRoutes             from '../../routes/MainRoutes';
+import { Container } from 'semantic-ui-react'
 
 class App extends Component {
   static propTypes = {
@@ -24,23 +24,16 @@ class App extends Component {
   };
   
   state = {
-    navModel : navigationModel
+    navModel : navigationModel,
   };
 
   render() {
-    const { navModel } = this.state;
 
     return (
       <div id="appContainer">
-        <NavigationBar
-          brand={navModel.brand}
-          navModel={navModel}
-          handleLeftNavItemClick={this.handleLeftNavItemClick}
-          handleRightNavItemClick={this.handleRightNavItemClick}
-        />
-        <div className="container-fluid">
+        <Container textAlign='justified' >
           <MainRoutes />
-        </div>
+        </Container>
         <BackToTop
           minScrollY={40}
           scrollTo={'appContainer'}
@@ -49,13 +42,6 @@ class App extends Component {
     );
   }
 
-  handleLeftNavItemClick = (event, viewName) => {
-    // something to do here?
-  }
-
-  handleRightNavItemClick = (event, viewName) => {
-    // something to do here?
-  }
 }
 
 export default App;

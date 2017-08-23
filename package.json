@@ -113,6 +113,7 @@
     "js-base64": "^2.1.9",
     "jwt-decode": "^2.2.0",
     "moment": "^2.18.1",
+    "normalize.css": "^7.0.0",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-bootstrap": "^0.31.2",
@@ -126,6 +127,8 @@
     "react-router-redux": "^4.0.8",
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "semantic-ui-css": "^2.2.12",
+    "semantic-ui-react": "^0.71.5"
   }
 }

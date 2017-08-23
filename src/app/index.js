@@ -6,9 +6,9 @@ import injectTpEventPlugin  from 'react-tap-event-plugin';
 import { AppContainer }     from 'react-hot-loader';
 import 'animate.css';
 import 'jquery';
+import 'normalize.css';
 import 'font-awesome/css/font-awesome.min.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.min.js';
+import 'semantic-ui-css/semantic.min.css';
 import './style/index.scss';
 import Root from './Root';
 
