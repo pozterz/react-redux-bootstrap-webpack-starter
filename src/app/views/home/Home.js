@@ -38,7 +38,7 @@ class Home extends PureComponent {
         <Grid className="mt-3">
           <Grid.Row>
             <Grid.Column>
-              <Balance  />
+              <Balance />
             </Grid.Column>
           </Grid.Row>
         </Grid>
