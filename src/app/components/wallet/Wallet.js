@@ -4,7 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TextBox from '../std-components/TextBox'
 import HeaderText from '../std-components/HeaderText'
-import {Form, Card, Header, Divider} from 'semantic-ui-react'
+import {Form, Card, Header, Divider, Button, Icon} from 'semantic-ui-react'
 
 export default class Wallet extends React.Component {
 
@@ -43,6 +43,13 @@ export default class Wallet extends React.Component {
                     size="tiny"
                     onChange={value => this.onDataChange('amount', value)}/>
                 </Form.Field>
+                <Button.Group floated="right">
+                  <Button
+                    primary
+                  >
+                  <Icon name="checkmark" />
+                  Save</Button>
+                </Button.Group>
               </Form>
             </Card.Content>
           </Card>
