@@ -7,7 +7,7 @@ import PropTypes      from 'prop-types';
 import { Wallet, Todo, Balance, Walllist, Wishlist }    from '../../components';
 import AnimatedView   from '../../components/animatedView/AnimatedView';
 import { Link }       from 'react-router-dom';
-import { Grid } from 'semantic-ui-react'
+import { Grid,Dimmer, Loader, Message } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import {
   firebaseConnect,
@@ -19,9 +19,9 @@ import {
 } from 'react-redux-firebase'
 
 @firebaseConnect([
-  { type: 'once', path: 'wallet' },
-  { type: 'once', path: 'money' },
-  { type: 'once', path: 'wishlist' }
+  { path: 'wallet', queryParams: ['orderByChild=-createdAt'] },
+  { path: 'money' },
+  { path: 'wishlist', queryParams: ['orderByChild=-createdAt'] }
 ])
 @connect(
   ({ firebase }) => ({
@@ -62,15 +62,63 @@ class Home extends PureComponent {
     leaveHome();
   }
 
+  onWalletSubmit(data){
+    const { newWalletData } = this.props;
+    const { money } = this.props;
+    data.createdAt = this.props.firebase.database.ServerValue.TIMESTAMP
+   
+    if(data.type === 'income') {
+      this.props.firebase.update('/money', { total: parseInt(money.total)+parseInt(data.amount)})
+    } else {
+      this.props.firebase.update('/money', { total: parseInt(money.total)-parseInt(data.amount)})
+    }
+    return this.props.firebase.push('/wallet', data);
+    console.log('submitted', data);
+  }
+
+  onWishlistSubmit(data){
+    const { newWalletData } = this.props;
+    data.createdAt = this.props.firebase.database.ServerValue.TIMESTAMP
+    return this.props.firebase.push('/wishlist', data);
+    console.log('submitted', data);
+  }
+
+  deleteWish = id => {
+    return this.props.firebase.remove(`/wishlist/${id}`).catch(err => {
+      console.error('Error removing wishlist: ', err) // eslint-disable-line no-console
+      this.setState({ error: 'Error Removing wishlist' })
+      return Promise.reject(err)
+    })
+  }
+
+  deleteWall = (data,id) => {
+    const { money } = this.props;
+    if(data.type === 'income') {
+      this.props.firebase.update('/money', { total: parseInt(money.total)-parseInt(data.amount)})
+    } else {
+      this.props.firebase.update('/money', { total: parseInt(money.total)+parseInt(data.amount)})
+    }
+    return this.props.firebase.remove(`/wallet/${id}`).catch(err => {
+      console.error('Error removing wallet: ', err) // eslint-disable-line no-console
+      this.setState({ error: 'Error Removing wallet' })
+      return Promise.reject(err)
+    })
+  }
+
   render() {
     const { wallet } = this.props;
     const { money } = this.props;
     const { wishlist } = this.props;
+    
 
     const TotalMoney = !isLoaded(money)
-      ? 'Loading'
+      ? <Dimmer active inverted>
+          <Loader size='medium'>Loading</Loader>
+        </Dimmer>
       : isEmpty(money)
-        ? 'Empty'
+        ? <Message info>
+            <Message.Header>Empty Record.</Message.Header>
+          </Message>
         : Object.keys(money).map(
           (key, id) => (
             <Balance key={key} money={money[key]} />
@@ -78,22 +126,31 @@ class Home extends PureComponent {
         )
 
     const walllist = !isLoaded(wallet)
-      ? 'Loading'
+      ? <Dimmer active inverted>
+          <Loader size='medium'>Loading</Loader>
+        </Dimmer>
       : isEmpty(wallet)
-        ? 'Empty'
-        : Object.keys(wallet).map(
-          (key, id) => (
-            <Walllist key={key} id={id} wallet={wallet[key]} />
+        ? <Message info>
+            <Message.Header>Empty Record.</Message.Header>
+          </Message>
+        : Object.keys(wallet).sort((a,b) => {return wallet[b].createdAt-wallet[a].createdAt}).map(
+            (key, id) => (
+              <Walllist key={key} id={key} money={money} onDeleteWall={this.deleteWall} wallet={wallet[key]} />
+            )
           )
-        )
+        
 
     const wishlists = !isLoaded(wishlist)
-      ? 'Loading'
+      ? <Dimmer active inverted>
+          <Loader  size='medium'>Loading</Loader>
+        </Dimmer>
       : isEmpty(wishlist)
-        ? 'Empty'
-        : Object.keys(wishlist).map(
+        ? <Message info>
+            <Message.Header>Empty Record.</Message.Header>
+          </Message>
+        : Object.keys(wishlist).sort((a,b) => {return wishlist[b].createdAt-wishlist[a].createdAt}).map(
           (key, id) => (
-            <Wishlist key={key} id={id} wish={wishlist[key]} />
+            <Wishlist key={key} id={key} money={money} onDeleteWish={this.deleteWish}  wish={wishlist[key]} />
           )
         )
 
@@ -109,11 +166,11 @@ class Home extends PureComponent {
         <Grid>
           <Grid.Row>
             <Grid.Column mobile={16} tablet={8} computer={8}>
-              <Todo />
+              <Todo onSubmit={data => this.onWishlistSubmit(data)}wallet={this.props.wallet}  />
               { wishlists }
             </Grid.Column>
             <Grid.Column mobile={16} tablet={8} computer={8}>
-              <Wallet wallet={this.props.wallet} />
+              <Wallet onSubmit={data => this.onWalletSubmit(data)} wallet={this.props.wallet} />
               { walllist }
             </Grid.Column>
           </Grid.Row>

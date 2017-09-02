@@ -13,6 +13,11 @@ export default class Balance extends React.Component {
     console.log('xD', this.state);    
   }
 
+  numberWithCommas(x) {
+    return x.toLocaleString(undefined,{minimumFractionDigits: 2})
+}
+
+
   componentWillReceiveProps(nextProps) {
     this.setState({
       ...nextProps
@@ -24,8 +29,8 @@ export default class Balance extends React.Component {
       <div className="Balance">
         <Segment clearing color='blue'>
           <Header size='huge' floated='right'>
-            <Statistic horizontal>
-              <Statistic.Value>{this.state.money}</Statistic.Value>
+            <Statistic horizontal color='green'>
+              <Statistic.Value >{this.numberWithCommas(this.state.money)}</Statistic.Value>
               <Statistic.Label>THB</Statistic.Label>
             </Statistic>
           </Header>
