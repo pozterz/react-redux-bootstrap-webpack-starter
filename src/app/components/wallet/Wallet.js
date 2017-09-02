@@ -8,6 +8,9 @@ import {Form, Card, Header, Divider, Button, Icon} from 'semantic-ui-react'
 
 export default class Wallet extends React.Component {
 
+  componentDidMount() {
+  }
+
   onDataChange(field, name) {
     console.log('field',field,name);
   }
