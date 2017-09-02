@@ -3,16 +3,18 @@
 import { routerReducer }    from 'react-router-redux';
 import { combineReducers }  from 'redux';
 import views                from './views';
+import wallet                from './wallet';
 import fakeModuleWithFetch  from './fakeModuleWithFetch';
 import userAuth             from './userAuth';
+import { firebaseStateReducer } from 'react-redux-firebase'
 
 export const reducers = {
+  wallet,
   views,
-  fakeModuleWithFetch,
-  userAuth
 };
 
 export default combineReducers({
   ...reducers,
-  routing: routerReducer
+  routing: routerReducer,
+  firebase: firebaseStateReducer
 });

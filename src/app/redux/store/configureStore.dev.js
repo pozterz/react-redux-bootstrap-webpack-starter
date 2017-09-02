@@ -9,14 +9,22 @@ import thunkMiddleware          from 'redux-thunk';
 import reducer                  from '../modules/reducers';
 import fetchMiddleware          from '../middleware/fetchMiddleware';
 import { composeWithDevTools }  from 'redux-devtools-extension';
+import { reactReduxFirebase } from 'react-redux-firebase'
 
 const loggerMiddleware = createLogger({
   level     : 'info',
   collapsed : true
 });
 
+const firebaseConfig = {
+  <YOUR FIREBASE CONFIG>
+}
+
+const reduxFirebaseConfig = { userProfile: 'users' }
+
 // createStore : enhancer
 const enhancer = composeWithDevTools(
+  reactReduxFirebase(firebaseConfig, reduxFirebaseConfig),
   applyMiddleware(
     thunkMiddleware,
     fetchMiddleware,

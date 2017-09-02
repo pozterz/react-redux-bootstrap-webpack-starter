@@ -13,38 +13,27 @@ const NavigationBar = ({
   handleRightNavItemClick
 }) => {
   return (
-    <nav className="navbar navbar-default">
-      <div className="containersCustom">
-        <div className="navbar-header">
-          {
-            <Humburger />
-          }
-          <a className="navbar-brand">
-            {brand}
-          </a>
+    <div className="container ui tiny menu">
+      <a className="active item">
+        Home
+      </a>
+      <a className="item">
+        Messages
+      </a>
+      <div className="right menu">
+        <div className="ui dropdown item">
+          Language <i className="dropdown icon"></i>
+          <div className="menu">
+            <a className="item">English</a>
+            <a className="item">Russian</a>
+            <a className="item">Spanish</a>
+          </div>
         </div>
-        <div
-          className="collapse navbar-collapse"
-          id="bs-example-navbar-collapse-1">
-          <ul className="nav navbar-nav">
-            {
-              <LeftNav
-                leftLinks={navModel.leftLinks}
-                onLeftNavButtonClick={handleLeftNavItemClick}
-              />
-            }
-          </ul>
-          <ul className="nav navbar-nav navbar-right">
-            {
-              <RightNav
-                rightLinks={navModel.rightLinks}
-                onRightNavButtonClick={handleRightNavItemClick}
-              />
-            }
-          </ul>
+        <div className="item">
+            <div className="ui primary button">Sign Up</div>
         </div>
       </div>
-    </nav>
+    </div>
   );
 };
 
