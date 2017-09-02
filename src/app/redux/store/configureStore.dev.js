@@ -17,12 +17,7 @@ const loggerMiddleware = createLogger({
 });
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC3kzyX5c0Uixav-E6Q9ZkPOWV2blAvHsg",
-  authDomain: "vue-firebase-5bfd6.firebaseapp.com",
-  databaseURL: "https://vue-firebase-5bfd6.firebaseio.com",
-  projectId: "vue-firebase-5bfd6",
-  storageBucket: "vue-firebase-5bfd6.appspot.com",
-  messagingSenderId: "1043717277183"
+  <YOUR FIREBASE CONFIG>
 }
 
 const reduxFirebaseConfig = { userProfile: 'users' }
