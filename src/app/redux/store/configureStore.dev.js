@@ -17,7 +17,12 @@ const loggerMiddleware = createLogger({
 });
 
 const firebaseConfig = {
-  <YOUR FIREBASE CONFIG>
+  apiKey: "AIzaSyDFclyGdzlJY48r-X3_0xMAPz0iYXrxI6g",
+  authDomain: "todowallet.firebaseapp.com",
+  databaseURL: "https://todowallet.firebaseio.com",
+  projectId: "todowallet",
+  storageBucket: "",
+  messagingSenderId: "1062641768371"
 }
 
 const reduxFirebaseConfig = { userProfile: 'users' }

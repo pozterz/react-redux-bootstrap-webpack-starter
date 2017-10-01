@@ -17,6 +17,8 @@ const BootstrapedElement    = document.getElementById(ELEMENT_TO_BOOTSTRAP);
 
 injectTpEventPlugin();
 
+
+
 const renderApp = RootComponent => {
   render(
     <AppContainer>

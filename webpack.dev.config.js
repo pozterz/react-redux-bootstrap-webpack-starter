@@ -1,7 +1,7 @@
 const webpack           = require('webpack');
 const path              = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
+var  ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 const assetsDir       = path.join(__dirname, 'docs/public/assets');
 const nodeModulesDir  = path.join(__dirname, 'node_modules');
 const vendorsDir      = path.join(__dirname, 'src/app/vendors');
@@ -105,7 +105,8 @@ const config = {
     new webpack.optimize.CommonsChunkPlugin({
       name:     'vendor',
       filename: 'app.vendor.bundle.js' 
-    })
+    }),
+    serviceWorker(),
   ]
 };
 
@@ -126,6 +127,12 @@ function setNodeEnv() {
       'NODE_ENV': JSON.stringify('dev')
     }
   });
+}
+
+function serviceWorker() {
+  return new ServiceWorkerWebpackPlugin({
+    entry: path.join(__dirname, 'src/sw.js'),
+  })
 }
 
 module.exports = config;
