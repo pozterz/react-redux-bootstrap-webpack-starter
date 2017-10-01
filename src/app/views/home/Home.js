@@ -69,9 +69,9 @@ class Home extends PureComponent {
     data.createdAt = this.props.firebase.database.ServerValue.TIMESTAMP
    
     if(data.type === 'income') {
-      this.props.firebase.update('/money', { total: parseInt(money.total)+parseInt(data.amount)})
+      this.props.firebase.update('/money', { total: parseFloat(money.total)+parseFloat(data.amount)})
     } else {
-      this.props.firebase.update('/money', { total: parseInt(money.total)-parseInt(data.amount)})
+      this.props.firebase.update('/money', { total: parseFloat(money.total)-parseFloat(data.amount)})
     }
     return this.props.firebase.push('/wallet', data);
     console.log('submitted', data);
@@ -95,9 +95,9 @@ class Home extends PureComponent {
   deleteWall = (data,id) => {
     const { money } = this.props;
     if(data.type === 'income') {
-      this.props.firebase.update('/money', { total: parseInt(money.total)-parseInt(data.amount)})
+      this.props.firebase.update('/money', { total: parseFloat(money.total)-parseFloat(data.amount)})
     } else {
-      this.props.firebase.update('/money', { total: parseInt(money.total)+parseInt(data.amount)})
+      this.props.firebase.update('/money', { total: parseFloat(money.total)+parseFloat(data.amount)})
     }
     return this.props.firebase.remove(`/wallet/${id}`).catch(err => {
       console.error('Error removing wallet: ', err) // eslint-disable-line no-console
