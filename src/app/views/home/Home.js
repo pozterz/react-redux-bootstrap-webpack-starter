@@ -27,6 +27,7 @@ import {
   ({ firebase }) => ({
     money: dataToJS(firebase, 'money'),
     wallet: dataToJS(firebase, 'wallet'),
+    auth: pathToJS(firebase, 'auth'),
     wishlist: dataToJS(firebase, 'wishlist'),
   })
 )
@@ -45,7 +46,7 @@ class Home extends PureComponent {
   };
 
   componentDidMount() {
-    const { enterHome } = this.props;
+    const { enterHome,auth,firebase } = this.props;
     enterHome();
   }
 
