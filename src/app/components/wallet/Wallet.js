@@ -87,7 +87,7 @@ export default class Wallet extends React.Component {
                     value={this.state.data? this.state.data.amount : null}
                     placeholder="How Much ?"
                     size="tiny"
-                    onChange={value => this.onDataChange('amount', value)}/>
+                    onChange={value => this.onDataChange('amount', parseFloat(value))}/>
                 </Form.Field>
                 <Button.Group>
                   <Button toggle active={income} onClick={this.handleClickIncome}>

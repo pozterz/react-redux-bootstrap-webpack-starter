@@ -42009,7 +42009,7 @@ var Wallet = function (_React$Component) {
                     placeholder: 'How Much ?',
                     size: 'tiny',
                     onChange: function onChange(value) {
-                      return _this4.onDataChange('amount', value);
+                      return _this4.onDataChange('amount', parseFloat(value));
                     } })
                 ),
                 _react2.default.createElement(
@@ -61282,7 +61282,7 @@ var Todo = function (_React$Component) {
                     placeholder: 'How Much ?',
                     size: 'tiny',
                     onChange: function onChange(value) {
-                      return _this2.onDataChange('price', value);
+                      return _this2.onDataChange('price', parseFloat(value));
                     } })
                 ),
                 _react2.default.createElement(_semanticUiReact.Rating, { name: 'rating', onRate: function onRate(value, data) {
@@ -62705,6 +62705,7 @@ var Home = (_dec = (0, _reactReduxFirebase.firebaseConnect)([{ path: 'wallet', q
 
       var money = this.props.money;
 
+      console.log(parseFloat(money.total));
       if (data.type === 'income') {
         this.props.firebase.update('/money', { total: parseFloat(money.total) - parseFloat(data.amount) });
       } else {

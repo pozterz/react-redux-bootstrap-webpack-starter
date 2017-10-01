@@ -89,7 +89,7 @@ export default class Todo extends React.Component {
                     value={this.state.data? this.state.data.price : null}
                     placeholder="How Much ?"
                     size="tiny"
-                    onChange={value => this.onDataChange('price', value)}/>
+                    onChange={value => this.onDataChange('price', parseFloat(value))}/>
                 </Form.Field>
                 <Rating name="rating" onRate={(value, data) => this.onRated('rating',data)} value={this.state.data? this.state.data.rating : null} icon='heart' defaultRating={1} maxRating={5} />
                 <Button.Group floated="right">

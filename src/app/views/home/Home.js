@@ -94,6 +94,7 @@ class Home extends PureComponent {
 
   deleteWall = (data,id) => {
     const { money } = this.props;
+    console.log(parseFloat(money.total))
     if(data.type === 'income') {
       this.props.firebase.update('/money', { total: parseFloat(money.total)-parseFloat(data.amount)})
     } else {
@@ -167,7 +168,7 @@ class Home extends PureComponent {
         <Grid>
           <Grid.Row>
             <Grid.Column mobile={16} tablet={8} computer={8}>
-              <Todo onSubmit={data => this.onWishlistSubmit(data)}wallet={this.props.wallet}  />
+              <Todo onSubmit={data => this.onWishlistSubmit(data)} wallet={this.props.wallet}  />
               { wishlists }
             </Grid.Column>
             <Grid.Column mobile={16} tablet={8} computer={8}>
